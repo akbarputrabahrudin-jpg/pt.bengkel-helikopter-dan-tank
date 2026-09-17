@@ -165,3 +165,202 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Customer - GARAGE TB</title>
+    <style>
+        :root {
+            --primary-color: #0b1329;
+            --accent-color: #0072ff;
+            --text-light: #f4f6f9;
+            --text-gray: #b0c4de;
+            --card-bg: #152238;
+            --error-color: #ff4d4d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .register-container {
+            background-color: var(--card-bg);
+            border: 1px solid #203554;
+            border-radius: 12px;
+            padding: 40px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .register-header h2 {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .register-header p {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: #0b1329;
+            border: 1px solid #203554;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-color);
+        }
+
+        .error-msg {
+            color: var(--error-color);
+            font-size: 0.75rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .btn-register {
+            width: 100%;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-register:hover {
+            background-color: #0056cc;
+            transform: translateY(-2px);
+        }
+
+        .register-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        .register-footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <div class="register-header">
+            <h2>Registrasi Customer</h2>
+            <p>Buat akun baru khusus untuk pelanggan / customer GARAGE TB</p>
+        </div>
+
+        <form id="registerForm" action="login.html" method="GET" onsubmit="return validatePassword(event)">
+            <div class="form-group">
+                <label for="nama">Nama Lengkap Customer</label>
+                <input type="text" id="nama" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Alamat Email</label>
+                <input type="email" id="email" class="form-control" placeholder="nama@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="whatsapp">Nomor WhatsApp Aktif</label>
+                <input type="tel" id="whatsapp" class="form-control" placeholder="Contoh: 08123456789" required>
+            </div>
+
+            <div class="form-group">
+                <label for="alamat">Alamat / Domisili</label>
+                <input type="text" id="alamat" class="form-control" placeholder="Kota / Wilayah Anda" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Kata Sandi (Password)</label>
+                <input type="password" id="password" class="form-control" placeholder="Minimal 6 karakter" minlength="6" required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">Konfirmasi Kata Sandi</label>
+                <input type="password" id="confirm_password" class="form-control" placeholder="Masukkan ulang kata sandi" required>
+                <div id="errorText" class="error-msg">Kata sandi tidak cocok! Pastikan sandi yang dimasukkan sama.</div>
+            </div>
+
+            <button type="submit" class="btn-register">Daftar Sebagai Customer</button>
+        </form>
+
+        <div class="register-footer">
+            <p>Sudah punya akun customer? <a href="login.html">Masuk di sini</a></p>
+            <p style="margin-top: 10px;"><a href="index.html">&larr; Kembali ke Beranda Utama</a></p>
+        </div>
+    </div>
+
+    <script>
+        function validatePassword(event) {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm_password").value;
+            var errorText = document.getElementById("errorText");
+
+            if (password !== confirmPassword) {
+                errorText.style.display = "block";
+                document.getElementById("confirm_password").style.borderColor = "#ff4d4d";
+                event.preventDefault(); // Mencegah form terkirim jika sandi tidak cocok
+                return false;
+            }
+            
+            errorText.style.display = "none";
+            return true;
+        }
+    </script>
+
+</body>
+</html>
