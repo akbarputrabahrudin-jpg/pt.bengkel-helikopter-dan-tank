@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrasi Notifikasi WhatsApp - GARAGE TB</title>
+    <style>
+        :root {
+            --primary-color: #0b1329;
+            --accent-color: #0072ff;
+            --text-light: #f4f6f9;
+            --text-gray: #b0c4de;
+            --card-bg: #152238;
+            --success-color: #25d366;
+            --warning-color: #ffc107;
+            --danger-color: #ff4d4d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        sidebar {
+            width: 260px;
+            background-color: #060a16;
+            border-right: 1px solid #1a2a47;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-brand {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #1a2a47;
+        }
+
+        .sidebar-brand img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            background: #fff;
+            border-radius: 6px;
+        }
+
+        .sidebar-brand h2 {
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .sidebar-menu li a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu li.active a, .sidebar-menu li a:hover {
+            background-color: var(--card-bg);
+            color: #fff;
+            border-left: 4px solid var(--success-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #060a16;
+            padding: 15px 30px;
+            border-bottom: 1px solid #1a2a47;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-profile {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .user-profile span {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 30px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .section-box {
+            background-color: var(--card-bg);
+            border: 1px solid #203554;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #203554;
+            padding-bottom: 10px;
+        }
+
+        .section-header h3 {
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group.full {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            background-color: #0b1329;
+            border: 1px solid #203554;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            height: 110px;
+        }
+
+        .btn-wa {
+            background-color: var(--success-color);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-wa:hover {
+            background-color: #1ebd59;
+        }
+
+        /* Table Design */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #203554;
+        }
+
+        th {
+            color: var(--text-gray);
+            background-color: #0b1329;
+        }
+
+        td {
+            color: var(--text-light);
+        }
+
+        .badge-wa {
+            background-color: rgba(37, 211, 102, 0.2);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <sidebar>
+        <div class="sidebar-brand">
+            <img src="logo-garage-tb.png" alt="Logo">
+            <h2>GARAGE TB</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="admin.html">Dashboard Admin</a></li>
+            <li><a href="invoice.html">Sistem Invoice</a></li>
+            <li class="active"><a href="#">Notifikasi WhatsApp</a></li>
+            <li><a href="login.html" style="color: var(--danger-color);">Keluar (Logout)</a></li>
+        </ul>
+    </sidebar>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <h2>Modul Integrasi Notifikasi WhatsApp (Gateway)</h2>
+            <div class="user-profile">
+                Status Sistem WA: <span style="color: var(--success-color);">● Terhubung (Online)</span>
+            </div>
+        </header>
+
+        <div class="container">
+            <!-- Panel Kirim Pesan / Trigger Manual -->
+            <div class="section-box">
+                <div class="section-header">
+                    <h3>Kirim Notifikasi WhatsApp Otomatis ke Pelanggan</h3>
+                </div>
+                <form action="#" method="POST">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="pilih-customer">Pilih Customer / Penerima</label>
+                            <select id="pilih-customer" class="form-control">
+                                <option value="628123456789">PT. Mitra Pertahanan Nusantara (0812-3456-789)</option>
+                                <option value="628987654321">TNI AD - Batalyon Kavaleri (0898-7654-321)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="template-pesan">Pilih Template Pesan</label>
+                            <select id="template-pesan" class="form-control">
+                                <option value="wo-dibuat">Work Order (WO) Baru Dibuat</option>
+                                <option value="maintenance-mulai">Maintenance & Perbaikan Dimulai</option>
+                                <option value="tunggu-part">Menunggu Suku Cadang (Spare Part)</option>
+                                <option value="selesai-qc">Unit Selesai & Lolos QC</option>
+                                <option value="invoice-siap">Invoice & Tagihan Tersedia</option>
+                            </select>
+                        </div>
+                        <div class="form-group full">
+                            <label for="isi-pesan">Template Pesan Otomatis (Dapat Diedit)</label>
+                            <textarea id="isi-pesan" class="form-control">Halo, Yth. PT. Mitra Pertahanan Nusantara. 
+Update dari GARAGE TB: Unit Helikopter BO-105 (WO-2026-089) saat ini telah memasuki tahap Maintenance. Anda dapat memantau progres secara live melalui Portal Customer kami. 
+Terima kasih telah mempercayakan layanan presisi bersama GARAGE TB.</textarea>
+                        </div>
+                        <div class="form-group full">
+                            <button type="button" class="btn-wa" onclick="alert('Pesan WhatsApp berhasil dikirim ke nomor tujuan!')">Kirim Pesan WhatsApp Sekarang</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Log / Riwayat Pesan Terkirim -->
+            <div class="section-box">
+                <div class="section-header">
+                    <h3>Log Riwayat Notifikasi Terkirim</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Waktu Kirim</th>
+                            <th>No. WhatsApp</th>
+                            <th>Penerima</th>
+                            <th>Kategori Pesan</th>
+                            <th>Status Gateway</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>17 Sept 2026, 14:20</td>
+                            <td>+62 812-3456-789</td>
+                            <td>PT. Mitra Pertahanan Nusantara</td>
+                            <td>Unit Diterima & Inspection</td>
+                            <td><span class="badge-wa">Terkirim (Delivered)</span></td>
+                        </tr>
+                        <tr>
+                            <td>16 Sept 2026, 10:05</td>
+                            <td>+62 898-7654-321</td>
+                            <td>TNI AD - Batalyon Kavaleri</td>
+                            <td>Jadwal Maintenance Unit</td>
+                            <td><span class="badge-wa">Terkirim (Delivered)</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
