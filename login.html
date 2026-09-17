@@ -23,190 +23,6 @@
         body {
             background-color: var(--primary-color);
             color: var(--text-light);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .login-container {
-            background-color: var(--card-bg);
-            border: 1px solid #203554;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-            width: 100%;
-            max-width: 450px;
-            padding: 40px;
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .login-header img {
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
-            border-radius: 8px;
-            border: 1px solid var(--accent-color);
-            background: #fff;
-            margin-bottom: 10px;
-        }
-
-        .login-header h1 {
-            font-size: 1.5rem;
-            color: #fff;
-            letter-spacing: 1px;
-        }
-
-        .login-header p {
-            font-size: 0.85rem;
-            color: var(--text-gray);
-            margin-top: 5px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.9rem;
-            color: var(--text-gray);
-            margin-bottom: 8px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            background-color: #0b1329;
-            border: 1px solid #203554;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .form-control:focus {
-            border-color: var(--accent-color);
-        }
-
-        .btn-login {
-            width: 100%;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-            margin-top: 10px;
-        }
-
-        .btn-login:hover {
-            background-color: #0056cc;
-            transform: translateY(-2px);
-        }
-
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: var(--text-gray);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
-
-        .back-link:hover {
-            color: var(--accent-color);
-        }
-    </style>
-</head>
-<body>
-
-    <div class="login-container">
-        <div class="login-header">
-            <img src="logo-garage-tb.png" alt="Logo GARAGE TB">
-            <h1>GARAGE TB SYSTEM</h1>
-            <p>Silakan pilih level akses dan masuk ke akun Anda</p>
-        </div>
-
-        <form action="#" method="POST" onsubmit="handleLogin(event)">
-            <div class="form-group">
-                <label for="role">Pilih Level Akses</label>
-                <select id="role" class="form-control" required>
-                    <option value="" disabled selected>-- Pilih Role / Jabatan --</option>
-                    <option value="owner">Owner / Management</option>
-                    <option value="admin">Admin</option>
-                    <option value="supervisor">Supervisor / QC</option>
-                    <option value="teknisi">Teknisi</option>
-                    <option value="warehouse">Warehouse (Gudang)</option>
-                    <option value="customer">Customer</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="username">Username / Email</label>
-                <input type="text" id="username" class="form-control" placeholder="Masukkan username atau email" required>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" placeholder="Masukkan password" required>
-            </div>
-
-            <button type="submit" class="btn-login">Masuk ke Dashboard</button>
-        </form>
-
-        <a href="system_v2.html" class="back-link">&larr; Kembali ke Beranda Utama</a>
-    </div>
-
-    <script>
-        function handleLogin(event) {
-            event.preventDefault();
-            const role = document.getElementById('role').value;
-            
-            // Simulasi pengalihan halaman berdasarkan role (dapat dikustomisasi ke file dashboard masing-masing)
-            alert('Berhasil simulasi login sebagai: ' + role.toUpperCase());
-            
-            // Contoh pengalihan (bisa diarahin ke dashboard spesifik nantinya)
-            // window.location.href = 'dashboard-' + role + '.html';
-        }
-    </script>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Sistem - GARAGE TB</title>
-    <style>
-        :root {
-            --primary-color: #0b1329;
-            --accent-color: #0072ff;
-            --text-light: #f4f6f9;
-            --text-gray: #b0c4de;
-            --card-bg: #152238;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--primary-color);
-            color: var(--text-light);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -226,11 +42,22 @@
 
         .login-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+        }
+
+        .login-header img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            background: #fff;
+            border-radius: 10px;
+            padding: 5px;
+            margin-bottom: 12px;
+            border: 1px solid var(--accent-color);
         }
 
         .login-header h2 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: #fff;
             margin-bottom: 5px;
         }
@@ -241,14 +68,14 @@
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .form-group label {
             display: block;
             font-size: 0.85rem;
             color: var(--text-gray);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .form-control, select.form-control {
@@ -293,7 +120,7 @@
 
         .login-footer {
             text-align: center;
-            margin-top: 25px;
+            margin-top: 20px;
             font-size: 0.85rem;
             color: var(--text-gray);
         }
@@ -313,25 +140,16 @@
 
     <div class="login-container">
         <div class="login-header">
-            <h2>Login Sistem GARAGE TB</h2>
-            <p>Pilih hak akses atau masukkan akun Anda</p>
+            <img src="logo-garage-tb.png" alt="Logo GARAGE TB">
+            <h2>GARAGE TB SYSTEM</h2>
+            <p>Silakan pilih level akses dan masuk ke akun Anda</p>
         </div>
 
         <form id="loginForm" onsubmit="handleLogin(event)">
             <div class="form-group">
-                <label for="email">Alamat Email / Username</label>
-                <input type="text" id="email" class="form-control" placeholder="nama@email.com / user" required>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Kata Sandi (Password)</label>
-                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
-            </div>
-
-            <div class="form-group">
-                <label for="role">Pilih Sesuai Hak Akses (Role)</label>
+                <label for="role">Pilih Level Akses (Role)</label>
                 <select id="role" class="form-control" required>
-                    <option value="" disabled selected>-- Pilih Dashboard Tujuan --</option>
+                    <option value="" disabled selected>-- Pilih Role / Jabatan --</option>
                     <option value="customer.html">Customer / Pelanggan</option>
                     <option value="admin.html">Admin Sistem</option>
                     <option value="teknisi.html">Teknisi</option>
@@ -341,7 +159,17 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn-login">Masuk ke Sistem</button>
+            <div class="form-group">
+                <label for="email">Username / Email</label>
+                <input type="text" id="email" class="form-control" placeholder="Masukkan username atau email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="Masukkan password" required>
+            </div>
+
+            <button type="submit" class="btn-login">Masuk ke Dashboard</button>
         </form>
 
         <div class="login-footer">
@@ -360,7 +188,7 @@
                 // Mengarahkan (redirect) otomatis ke file html dashboard yang dipilih
                 window.location.href = selectedRole;
             } else {
-                alert("Silakan pilih hak akses terlebih dahulu!");
+                alert("Silakan pilih level akses terlebih dahulu!");
             }
         }
     </script>
