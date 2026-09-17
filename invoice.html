@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Invoice - GARAGE TB</title>
+    <style>
+        :root {
+            --primary-color: #0b1329;
+            --accent-color: #0072ff;
+            --text-light: #f4f6f9;
+            --text-gray: #b0c4de;
+            --card-bg: #152238;
+            --success-color: #25d366;
+            --warning-color: #ffc107;
+            --danger-color: #ff4d4d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        sidebar {
+            width: 260px;
+            background-color: #060a16;
+            border-right: 1px solid #1a2a47;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-brand {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #1a2a47;
+        }
+
+        .sidebar-brand img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            background: #fff;
+            border-radius: 6px;
+        }
+
+        .sidebar-brand h2 {
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .sidebar-menu li a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu li.active a, .sidebar-menu li a:hover {
+            background-color: var(--card-bg);
+            color: #fff;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #060a16;
+            padding: 15px 30px;
+            border-bottom: 1px solid #1a2a47;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-profile {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .user-profile span {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 30px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background-color: var(--card-bg);
+            border: 1px solid #203554;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .stat-card h4 {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-bottom: 8px;
+        }
+
+        .stat-card .number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* Section Box */
+        .section-box {
+            background-color: var(--card-bg);
+            border: 1px solid #203554;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #203554;
+            padding-bottom: 10px;
+        }
+
+        .section-header h3 {
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .btn-action {
+            background-color: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-action:hover {
+            background-color: #0056cc;
+        }
+
+        /* Table Design */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #203554;
+        }
+
+        th {
+            color: var(--text-gray);
+            background-color: #0b1329;
+        }
+
+        td {
+            color: var(--text-light);
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .badge-paid {
+            background-color: rgba(37, 211, 102, 0.2);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+        }
+
+        .badge-unpaid {
+            background-color: rgba(255, 77, 77, 0.2);
+            color: var(--danger-color);
+            border: 1px solid var(--danger-color);
+        }
+
+        .badge-partial {
+            background-color: rgba(255, 193, 7, 0.2);
+            color: var(--warning-color);
+            border: 1px solid var(--warning-color);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Sistem Invoice -->
+    <sidebar>
+        <div class="sidebar-brand">
+            <img src="logo-garage-tb.png" alt="Logo">
+            <h2>GARAGE TB</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="admin.html">Dashboard Admin</a></li>
+            <li class="active"><a href="#">Sistem Invoice</a></li>
+            <li><a href="#">Daftar Pembayaran</a></li>
+            <li><a href="#">Laporan Keuangan</a></li>
+            <li><a href="login.html" style="color: var(--danger-color);">Keluar (Logout)</a></li>
+        </ul>
+    </sidebar>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <h2>Modul Keuangan & Sistem Invoice</h2>
+            <div class="user-profile">
+                Admin Keuangan: <span>Siti Rahma</span>
+            </div>
+        </header>
+
+        <div class="container">
+            <!-- Statistik Keuangan -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Total Invoice Bulan Ini</h4>
+                    <div class="number">Rp 145.000.000</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Sudah Dibayar (Paid)</h4>
+                    <div class="number" style="color: var(--success-color);">Rp 110.000.000</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Belum Dibayar (Unpaid)</h4>
+                    <div class="number" style="color: var(--danger-color);">Rp 25.000.000</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Pembayaran Sebagian (Partial)</h4>
+                    <div class="number" style="color: var(--warning-color);">Rp 10.000.000</div>
+                </div>
+            </div>
+
+            <!-- Daftar Invoice Aktif -->
+            <div class="section-box">
+                <div class="section-header">
+                    <h3>Daftar Invoice & Status Pembayaran</h3>
+                    <button class="btn-action">+ Buat Invoice Baru</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No. Invoice</th>
+                            <th>No. WO</th>
+                            <th>Customer</th>
+                            <th>Unit Terkait</th>
+                            <th>Total Tagihan</th>
+                            <th>Status Pembayaran</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>INV-2026-041</td>
+                            <td>WO-2026-089</td>
+                            <td>PT. Mitra Pertahanan Nusantara</td>
+                            <td>Helikopter BO-105</td>
+                            <td>Rp 45.000.000</td>
+                            <td><span class="badge badge-unpaid">Unpaid</span></td>
+                            <td><a href="#" style="color: var(--accent-color); text-decoration: none; font-weight: bold;">Cetak / View</a></td>
+                        </tr>
+                        <tr>
+                            <td>INV-2026-040</td>
+                            <td>WO-2026-085</td>
+                            <td>TNI AD - Batalyon Kavaleri</td>
+                            <td>Tank AMX-13</td>
+                            <td>Rp 65.000.000</td>
+                            <td><span class="badge badge-paid">Paid</span></td>
+                            <td><a href="#" style="color: var(--accent-color); text-decoration: none; font-weight: bold;">Cetak / View</a></td>
+                        </tr>
+                        <tr>
+                            <td>INV-2026-039</td>
+                            <td>WO-2026-082</td>
+                            <td>Personal / Umum</td>
+                            <td>iPhone 15 Pro Max</td>
+                            <td>Rp 3.500.000</td>
+                            <td><span class="badge badge-partial">Partial</span></td>
+                            <td><a href="#" style="color: var(--accent-color); text-decoration: none; font-weight: bold;">Cetak / View</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Preview Detail Komponen Invoice -->
+            <div class="section-box">
+                <div class="section-header">
+                    <h3>Detail Rincian Tagihan (Preview INV-2026-041)</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Keterangan / Deskripsi Pekerjaan & Spare Part</th>
+                            <th>Qty</th>
+                            <th>Harga Satuan</th>
+                            <th>Jumlah Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Jasa Overhaul & Maintenance Main Rotor Gearbox</td>
+                            <td>1 Ls</td>
+                            <td>Rp 25.000.000</td>
+                            <td>Rp 25.000.000</td>
+                        </tr>
+                        <tr>
+                            <td>Seal Hidrolik Set (P/N: H-992)</td>
+                            <td>2 Pcs</td>
+                            <td>Rp 5.000.000</td>
+                            <td>Rp 10.000.000</td>
+                        </tr>
+                        <tr>
+                            <td>Oli Gearbox Penerbangan Khusus (Liter)</td>
+                            <td>10 Ltr</td>
+                            <td>Rp 1.000.000</td>
+                            <td>Rp 10.000.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 20px; text-align: right; font-size: 1rem;">
+                    <p>Subtotal: Rp 45.000.000</p>
+                    <p>Pajak (PPN 0% / Non-Pajak): Rp 0</p>
+                    <h3 style="color: var(--success-color); margin-top: 5px;">Total Keseluruhan: Rp 45.000.000</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
