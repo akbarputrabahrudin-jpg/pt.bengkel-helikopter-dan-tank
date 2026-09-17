@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Akun - GARAGE TB</title>
+    <title>Pendaftaran Customer - GARAGE TB</title>
     <style>
         :root {
             --primary-color: #0b1329;
@@ -11,7 +11,6 @@
             --text-light: #f4f6f9;
             --text-gray: #b0c4de;
             --card-bg: #152238;
-            --success-color: #25d366;
         }
 
         * {
@@ -43,18 +42,7 @@
 
         .register-header {
             text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .register-header img {
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
-            background: #fff;
-            border-radius: 10px;
-            padding: 5px;
-            margin-bottom: 15px;
-            border: 1px solid var(--accent-color);
+            margin-bottom: 25px;
         }
 
         .register-header h2 {
@@ -69,14 +57,14 @@
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .form-group label {
             display: block;
             font-size: 0.85rem;
             color: var(--text-gray);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .form-control {
@@ -116,7 +104,7 @@
 
         .register-footer {
             text-align: center;
-            margin-top: 25px;
+            margin-top: 20px;
             font-size: 0.85rem;
             color: var(--text-gray);
         }
@@ -136,25 +124,29 @@
 
     <div class="register-container">
         <div class="register-header">
-            <img src="logo-garage-tb.png" alt="Logo GARAGE TB">
-            <h2>Buat Akun Baru</h2>
-            <p>Daftar untuk mengakses sistem layanan & pemantauan unit GARAGE TB</p>
+            <h2>Registrasi Customer</h2>
+            <p>Buat akun baru khusus untuk pelanggan / customer GARAGE TB</p>
         </div>
 
         <form action="login.html" method="GET">
             <div class="form-group">
-                <label for="nama">Nama Lengkap / Instansi / Perusahaan</label>
-                <input type="text" id="nama" class="form-control" placeholder="Contoh: PT. Mitra Pertahanan Nusantara" required>
+                <label for="nama">Nama Lengkap Customer</label>
+                <input type="text" id="nama" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
             </div>
 
             <div class="form-group">
                 <label for="email">Alamat Email</label>
-                <input type="email" id="email" class="form-control" placeholder="nama@perusahaan.com" required>
+                <input type="email" id="email" class="form-control" placeholder="nama@email.com" required>
             </div>
 
             <div class="form-group">
                 <label for="whatsapp">Nomor WhatsApp Aktif</label>
-                <input type="tel" id="whatsapp" class="form-control" placeholder="08123456789" required>
+                <input type="tel" id="whatsapp" class="form-control" placeholder="Contoh: 08123456789" required>
+            </div>
+
+            <div class="form-group">
+                <label for="alamat">Alamat / Domisili</label>
+                <input type="text" id="alamat" class="form-control" placeholder="Kota / Wilayah Anda" required>
             </div>
 
             <div class="form-group">
@@ -162,11 +154,11 @@
                 <input type="password" id="password" class="form-control" placeholder="••••••••" required>
             </div>
 
-            <button type="submit" class="btn-register">Daftar Sekarang</button>
+            <button type="submit" class="btn-register">Daftar Sebagai Customer</button>
         </form>
 
         <div class="register-footer">
-            <p>Sudah punya akun? <a href="login.html">Masuk di sini</a></p>
+            <p>Sudah punya akun customer? <a href="login.html">Masuk di sini</a></p>
             <p style="margin-top: 10px;"><a href="index.html">&larr; Kembali ke Beranda Utama</a></p>
         </div>
     </div>
