@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Manajemen GARAGE TB - Helikopter & Tank</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2b6cb0;
+            --accent: #3182ce;
+            --dark: #2d3748;
+            --light: #f7f9fa;
+            --white: #ffffff;
+            --gray: #718096;
+            --sidebar-width: 260px;
+            --danger: #e53e3e;
+            --success: #38a169;
+            --warning: #d69e2e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar Styling */
+        aside {
+            width: var(--sidebar-width);
+            background: var(--primary);
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .sidebar-brand {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            padding-left: 10px;
+        }
+
+        .sidebar-brand span {
+            color: var(--accent);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            flex-grow: 1;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #cbd5e0;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background: var(--secondary);
+            color: var(--white);
+        }
+
+        .sidebar-footer {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 15px;
+        }
+
+        .sidebar-footer a {
+            color: #feb2b2;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Main Content Area */
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        header {
+            background: var(--white);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .header-title h2 {
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .user-profile img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #cbd5e0;
+        }
+
+        /* Dashboard Content Panels */
+        .content-body {
+            padding: 30px;
+        }
+
+        .panel {
+            display: none;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        /* Stats Cards Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--accent);
+        }
+
+        .stat-card h4 {
+            color: var(--gray);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Tables */
+        .card-table {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .card-table-header {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 12px 20px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f8fafc;
+            color: var(--gray);
+            font-weight: 600;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge.warning { background: #feebc8; color: #9c4221; }
+        .badge.info { background: #ebf8ff; color: #2b6cb0; }
+        .badge.success { background: #c6f6d5; color: #22543d; }
+        .badge.danger { background: #fed7d7; color: #742a2a; }
+
+        /* Alert Box */
+        .alert-box {
+            background: #fed7d7;
+            border-left: 4px solid var(--danger);
+            color: #742a2a;
+            padding: 15px 20px;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Timeline Tracking */
+        .tracking-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        .step-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px auto;
+            font-size: 0.9rem;
+        }
+
+        .step.completed .step-icon {
+            background: var(--success);
+            color: white;
+        }
+
+        .step.active .step-icon {
+            background: var(--secondary);
+            color: white;
+            box-shadow: 0 0 0 4px #bee3f8;
+        }
+
+        .step span {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .step.active span, .step.completed span {
+            color: var(--primary);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside>
+        <div>
+            <div class="sidebar-brand">GARAGE <span>TB</span></div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active" onclick="switchPanel('owner', this)"><i class="fas fa-chart-pie"></i> Dashboard Owner</a></li>
+                <li><a href="#" onclick="switchPanel('admin', this)"><i class="fas fa-tasks"></i> Dashboard Admin &amp; WO</a></li>
+                <li><a href="#" onclick="switchPanel('technician', this)"><i class="fas fa-wrench"></i> Dashboard Teknisi</a></li>
+                <li><a href="#" onclick="switchPanel('warehouse', this)"><i class="fas fa-warehouse"></i> Dashboard Warehouse</a></li>
+                <li><a href="#" onclick="switchPanel('customer', this)"><i class="fas fa-user-shield"></i> Portal Customer</a></li>
+            </ul>
+        </div>
+        <div class="sidebar-footer">
+            <a href="#"><i class="fas fa-sign-out-alt"></i> Keluar Sistem</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+        <header>
+            <div class="header-title">
+                <h2 id="page-title">Dashboard Management (Owner)</h2>
+            </div>
+            <div class="user-profile">
+                <img src="" alt="">
+                <span id="current-user-role">Direktur Utama (Owner)</span>
+            </div>
+        </header>
+
+        <div class="content-body">
+
+            <!-- 1. OWNER / MANAGEMENT PANEL -->
+            <div id="panel-owner" class="panel active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>Total Customer</h4>
+                        <div class="number">24</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Unit Dalam Service</h4>
+                        <div class="number">8</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>WO Aktif</h4>
+                        <div class="number">12</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Pendapatan Bulan Ini</h4>
+                        <div class="number" style="font-size: 1.4rem;">Rp 1.45 Milyar</div>
+                    </div>
+                </div>
+
+                <div class="card-table">
+                    <div class="card-table-header">Monitoring Unit Berjalan</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No WO</th>
+                                <th>Jenis Unit</th>
+                                <th>Customer</th>
+                                <th>Teknisi Penanggung Jawab</th>
+                                <th>Status Progress</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>WO-2026-001</td>
+                                <td>Helikopter Bell 412</td>
+                                <td>Skadron Udara TNI</td>
+                                <td>Kapten Tek. Budi</td>
+                                <td><span class="badge info">In Progress</span></td>
+                            </tr>
+                            <tr>
+                                <td>WO-2026-002</td>
+                                <td>Tank Leopard 2RI</td>
+                                <td>Kavaleri TNI AD</td>
+                                <td>Sertu Joko</td>
+                                <td><span class="badge warning">Waiting Spare Part</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 2. ADMIN PANEL -->
+            <div id="panel-admin" class="panel">
+                <div class="card-table">
+                    <div class="card-table-header">
+                        <span>Manajemen Work Order (WO)</span>
+                        <button style="background:var(--secondary); color:white; border:none; padding:8px 15px; border-radius:4px; cursor:pointer;"><i class="fas fa-plus"></i> Buat WO Baru</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID WO</th>
+                                <th>Customer</th>
+                                <th>Unit &amp; No Seri</th>
+                                <th>Deadline</th>
+                                <th>Status Terkini</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>WO-2026-001</td>
+                                <td>Skadron Udara TNI</td>
+                                <td>Helikopter Bell 412 (SN-9982)</td>
+                                <td>25 Mar 2026</td>
+                                <td><span class="badge info">Scheduled</span></td>
+                            </tr>
+                            <tr>
+                                <td>WO-2026-005</td>
+                                <td>PT. Freeport Indonesia</td>
+                                <td>Helikopter MI-17 (SN-4410)</td>
+                                <td>30 Mar 2026</td>
+                                <td><span class="badge warning">Waiting Approval</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 3. TEKNISI PANEL -->
+            <div id="panel-technician" class="panel">
+                <div class="card-table">
+                    <div class="card-table-header">Tugas Pekerjaan Saya (Teknisi)</div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No WO</th>
+                                    <th>Unit</th>
+                                    <th>Keluhan / Instruksi</th>
+                                    <th>Prioritas</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>WO-2026-001</td>
+                                    <td>Helikopter Bell 412</td>
+                                    <td>Overhaul mesin utama &amp; cek hidrolik rotor.</td>
+                                    <td><span class="badge danger">Tinggi</span></td>
+                                    <td><button style="background:var(--secondary); color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer;">Update Pemeriksaan</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+
+            <!-- 4. WAREHOUSE PANEL -->
+            <div id="panel-warehouse" class="panel">
+                <div class="alert-box">
+                    <i class="fas fa-exclamation-triangle fa-2x"></i>
+                    <div>
+                        <strong>⚠️ STOCK SPARE PART MENIPIS:</strong> Filter Oli Mesin Helikopter (Part #FL-8890) tersisa 2 unit di gudang utama. Segera lakukan restock!
+                    </div>
+                </div>
+
+                <div class="card-table">
+                    <div class="card-table-header">Inventaris Suku Cadang Gudang</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Kode Part</th>
+                                <th>Nama Komponen</th>
+                                <th>Part Number</th>
+                                <th>Stok</th>
+                                <th>Lokasi Rak</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PRT-0192</td>
+                                <td>Main Rotor Blade Bearing</td>
+                                <td>MRB-412-X</td>
+                                <td>5 Unit</td>
+                                <td>Rak A-02</td>
+                            </tr>
+                            <tr>
+                                <td>PRT-0442</td>
+                                <td>Filter Oli Mesin</td>
+                                <td>FL-8890</td>
+                                <td><span style="color:var(--danger); font-weight:bold;">2 Unit (Min: 5)</span></td>
+                                <td>Rak C-10</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 5. CUSTOMER PORTAL -->
+            <div id="panel-customer" class="panel">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>Total Unit Terdaftar</h4>
+                        <div class="number">2 Unit</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Unit Dalam Perbaikan</h4>
+                        <div class="number">1 Unit</div>
+                    </div>
+                </div>
+
+                <div class="card-table">
+                    <div class="card-table-header">Live Tracking Service: Helikopter Bell 412 (WO-2026-001)</div>
+                    <div style="padding: 30px 20px;">
+                        <div class="tracking-steps">
+                            <div class="step completed">
+                                <div class="step-icon"><i class="fas fa-check"></i></div>
+                                <span>Unit Diterima</span>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-icon"><i class="fas fa-check"></i></div>
+                                <span>Inspection</span>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-icon"><i class="fas fa-check"></i></div>
+                                <span>WO Dibuat</span>
+                            </div>
+                            <div class="step active">
+                                <div class="step-icon"><i class="fas fa-tools"></i></div>
+                                <span>Maintenance</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-icon"><i class="fas fa-clipboard-check"></i></div>
+                                <span>QC</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-icon"><i class="fas fa-flag-checkered"></i></div>
+                                <span>Selesai</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- JavaScript Interactivity -->
+    <script>
+        function switchPanel(panelName, element) {
+            // Hide all panels
+            const panels = document.querySelectorAll('.panel');
+            panels.forEach(p => p.classList.remove('active'));
+
+            // Remove active class from menu links
+            const links = document.querySelectorAll('.sidebar-menu a');
+            links.forEach(l => l.classList.remove('active'));
+
+            // Show selected panel
+            document.getElementById('panel-' + panelName).classList.add('active');
+            element.classList.add('active');
+
+            // Update Header Title & Role
+            const titles = {
+                'owner': ['Dashboard Management (Owner)', 'Direktur Utama (Owner)'],
+                'admin': ['Dashboard Admin & Work Order', 'Administrator Bengkel'],
+                'technician': ['Dashboard Teknisi Lapangan', 'Teknisi Senior (Aviasi)'],
+                'warehouse': ['Dashboard Warehouse & Inventory', 'Kepala Gudang Spare Part'],
+                'customer': ['Portal Pelanggan (Customer Tracking)', 'Skadron Udara TNI (Klien)']
+            };
+
+            document.getElementById('page-title').innerText = titles[panelName][0];
+            document.getElementById('current-user-role').innerText = titles[panelName][1];
+        }
+    </script>
+</body>
+</html>
