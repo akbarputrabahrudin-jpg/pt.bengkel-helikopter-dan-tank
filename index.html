@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GARAGE TB - Bengkel Helikopter & Tank & Service iPhone</title>
+    <title>GARAGE TB - Bengkel Helikopter, Tank & Service iPhone</title>
     <style>
         :root {
             --primary-color: #0b1329;
@@ -31,9 +31,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
+            padding: 15px 5%;
             background-color: #060a16;
             border-bottom: 2px solid var(--accent-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .logo-container {
@@ -43,21 +46,22 @@
         }
 
         .logo-container img {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             object-fit: contain;
             border-radius: 8px;
             border: 1px solid var(--accent-color);
+            background: #fff;
         }
 
         .logo-text h1 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             letter-spacing: 1px;
             color: #fff;
         }
 
         .logo-text p {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-gray);
         }
 
@@ -66,6 +70,7 @@
             text-decoration: none;
             margin-left: 20px;
             font-weight: 600;
+            font-size: 0.95rem;
             transition: color 0.3s;
         }
 
@@ -76,20 +81,23 @@
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(rgba(11, 19, 41, 0.9), rgba(11, 19, 41, 0.9)), url('logo-garage-tb.png') center/cover;
+            padding: 70px 20px;
+            background: linear-gradient(135deg, rgba(11, 19, 41, 0.95), rgba(6, 10, 22, 0.95));
+            border-bottom: 1px solid #1a2a47;
         }
 
         .hero h2 {
             font-size: 2.5rem;
             margin-bottom: 15px;
             color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .hero p {
             font-size: 1.1rem;
             color: var(--text-gray);
-            max-width: 700px;
+            max-width: 750px;
             margin: 0 auto 25px auto;
         }
 
@@ -97,15 +105,17 @@
             display: inline-block;
             background-color: #25d366;
             color: white;
-            padding: 12px 25px;
+            padding: 12px 30px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
-            transition: background 0.3s;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s;
         }
 
         .btn-wa:hover {
             background-color: #1ebd59;
+            transform: translateY(-2px);
         }
 
         /* Section Styling */
@@ -129,16 +139,16 @@
         /* Galeri Evident Pekerjaan */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
         }
 
         .gallery-item {
             background-color: var(--card-bg);
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
             border: 1px solid #203554;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
             transition: transform 0.3s;
         }
 
@@ -148,17 +158,18 @@
 
         .gallery-item img {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
+            border-bottom: 1px solid #203554;
         }
 
         .gallery-content {
-            padding: 15px;
+            padding: 20px;
         }
 
         .gallery-content h4 {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
             color: var(--accent-color);
         }
 
@@ -170,19 +181,19 @@
         /* Footer */
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 25px;
             background-color: #060a16;
             color: var(--text-gray);
             border-top: 1px solid #1a2a47;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header dengan Logo -->
+    <!-- Header & Logo -->
     <header>
         <div class="logo-container">
-            <!-- Ganti src dengan nama file logo Anda -->
             <img src="logo-garage-tb.png" alt="Logo GARAGE TB">
             <div class="logo-text">
                 <h1>GARAGE TB</h1>
@@ -192,7 +203,7 @@
         <nav>
             <a href="#home">Home</a>
             <a href="#evident">Galeri & Evident</a>
-            <a href="https://wa.me/6288225604848" target="_blank">Kontak WhatsApp</a>
+            <a href="https://wa.me/6288225604848" target="_blank">WhatsApp</a>
         </nav>
     </header>
 
@@ -211,28 +222,28 @@
         <div class="gallery-grid">
             <!-- Evident 1 -->
             <div class="gallery-item">
-                <img src="IMG-20260906-WA0014_2.jpg" alt="Pengerjaan Hardware iPhone">
+                <img src="IMG_20250916_223351.jpg" alt="Pengerjaan Workshop 1">
                 <div class="gallery-content">
-                    <h4>Perbaikan Unit iPhone</h4>
-                    <p>Proses pembongkaran dan perbaikan komponen handphone di meja service.</p>
+                    <h4>Aktivitas Workshop Utama</h4>
+                    <p>Dokumentasi penataan peralatan dan pengerjaan teknis di meja service.</p>
                 </div>
             </div>
 
             <!-- Evident 2 -->
             <div class="gallery-item">
-                <img src="IMG-20260127-WA0003_2.jpg" alt="Setup Workstation Teknisi">
+                <img src="IMG_20250919_200949.jpg" alt="Pengerjaan Workshop 2">
                 <div class="gallery-content">
-                    <h4>Workstation & Diagnostik</h4>
-                    <p>Pengecekan sistem perangkat menggunakan laptop dan perangkat penunjang.</p>
+                    <h4>Pengecekan & Diagnostik</h4>
+                    <p>Proses analisa perangkat menggunakan alat pendukung dan komputer.</p>
                 </div>
             </div>
 
             <!-- Evident 3 -->
             <div class="gallery-item">
-                <img src="IMG_20250916_223351_2.jpg" alt="Board Repair & Microsoldering">
+                <img src="IMG_20251002_153807.jpg" alt="Pengerjaan Workshop 3">
                 <div class="gallery-content">
-                    <h4>Board Repair & Sparepart</h4>
-                    <p>Aktivitas pengerjaan tingkat lanjut didukung peralatan modern dan tertata.</p>
+                    <h4>Perbaikan & Sparepart</h4>
+                    <p>Penanganan detail komponen perangkat secara teliti dan profesional.</p>
                 </div>
             </div>
         </div>
