@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Akun Master - GARAGE TB</title>
+    <style>
+        :root {
+            --primary-bg: #070d1d;
+            --card-bg: #111b33;
+            --border-color: #1f3359;
+            --accent-color: #ffaa00; /* Warna khusus Master/Owner (Gold/Amber) */
+            --accent-hover: #e09600;
+            --text-light: #f4f6f9;
+            --text-gray: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--accent-color);
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 12px 32px rgba(255, 170, 0, 0.15);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .login-header img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            background: #fff;
+            border-radius: 10px;
+            padding: 5px;
+            margin-bottom: 12px;
+            border: 1px solid var(--accent-color);
+        }
+
+        .login-header h2 {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .badge-master {
+            display: inline-block;
+            background-color: rgba(255, 170, 0, 0.15);
+            color: var(--accent-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: var(--primary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-color);
+        }
+
+        .btn-login {
+            width: 100%;
+            background-color: var(--accent-color);
+            color: #070d1d;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(255, 170, 0, 0.3);
+        }
+
+        .btn-login:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        .login-footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-header">
+            <img src="logo-garage-tb.png" alt="Logo GARAGE TB">
+            <h2>GARAGE TB SYSTEM</h2>
+            <div class="badge-master">AKUN MASTER / OWNER</div>
+        </div>
+
+        <form id="masterLoginForm" onsubmit="handleMasterLogin(event)">
+            <div class="form-group">
+                <label for="master_user">Username Master / Email</label>
+                <input type="text" id="master_user" class="form-control" placeholder="owner@garagetb.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="master_pass">Kata Sandi Master (Password)</label>
+                <input type="password" id="master_pass" class="form-control" placeholder="••••••••••••" required>
+            </div>
+
+            <button type="submit" class="btn-login">Masuk ke Dashboard Master</button>
+        </form>
+
+        <div class="login-footer">
+            <p style="margin-top: 15px;"><a href="login.html">&larr; Kembali ke Login Regular / Karyawan</a></p>
+        </div>
+    </div>
+
+    <script>
+        function handleMasterLogin(event) {
+            event.preventDefault();
+            
+            var user = document.getElementById("master_user").value;
+            var pass = document.getElementById("master_pass").value;
+
+            // Kredensial default Akun Master (dapat disesuaikan)
+            if (user === "owner" || user === "owner@garagetb.com") {
+                alert("Login Master Berhasil! Mengarahkan ke Dashboard Utama Owner...");
+                window.location.href = "admin.html"; // Atau arahkan ke file dashboard master khusus jika ada
+            } else {
+                alert("Username atau Kata Sandi Master salah!");
+            }
+        }
+    </script>
+
+</body>
+</html>
