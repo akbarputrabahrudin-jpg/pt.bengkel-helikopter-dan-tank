@@ -153,13 +153,13 @@
 
         <form id="masterLoginForm" onsubmit="handleMasterLogin(event)">
             <div class="form-group">
-                <label for="master_user">Username Master / Email</label>
-                <input type="text" id="master_user" class="form-control" placeholder="owner@garagetb.com" required>
+                <label for="master_user">Username Master</label>
+                <input type="text" id="master_user" class="form-control" placeholder="servertb" required>
             </div>
 
             <div class="form-group">
-                <label for="master_pass">Kata Sandi Master (Password)</label>
-                <input type="password" id="master_pass" class="form-control" placeholder="••••••••••••" required>
+                <label for="master_pass">Kata Sandi (Password)</label>
+                <input type="password" id="master_pass" class="form-control" placeholder="Masukkan kata sandi" required>
             </div>
 
             <button type="submit" class="btn-login">Masuk ke Dashboard Master</button>
@@ -174,13 +174,13 @@
         function handleMasterLogin(event) {
             event.preventDefault();
             
-            var user = document.getElementById("master_user").value;
+            var user = document.getElementById("master_user").value.trim();
             var pass = document.getElementById("master_pass").value;
 
-            // Kredensial default Akun Master (dapat disesuaikan)
-            if (user === "owner" || user === "owner@garagetb.com") {
+            // Kredensial Akun Master: Username "servertb", Password "kagapake"
+            if (user.toLowerCase() === "servertb" && pass === "kagapake") {
                 alert("Login Master Berhasil! Mengarahkan ke Dashboard Utama Owner...");
-                window.location.href = "admin.html"; // Atau arahkan ke file dashboard master khusus jika ada
+                window.location.href = "admin.html";
             } else {
                 alert("Username atau Kata Sandi Master salah!");
             }
