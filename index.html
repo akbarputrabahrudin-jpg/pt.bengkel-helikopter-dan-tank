@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GARAGE TB - Bengkel Helikopter & Tank</title>
+    <title>GARAGE TB - Bengkel Helikopter, Tank & Service iPhone</title>
     <style>
         :root {
             --bg-color: #070d1d;
@@ -13,7 +13,6 @@
             --accent-hover: #0056cc;
             --text-light: #f4f6f9;
             --text-gray: #94a3b8;
-            --whatsapp-color: #25d366;
         }
 
         * {
@@ -34,7 +33,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 6%;
+            padding: 15px 5%;
             background-color: var(--card-bg);
             border-bottom: 1px solid var(--border-color);
             position: sticky;
@@ -49,8 +48,8 @@
         }
 
         .nav-brand img {
-            width: 42px;
-            height: 42px;
+            width: 45px;
+            height: 45px;
             object-fit: contain;
             background: #fff;
             border-radius: 8px;
@@ -65,9 +64,10 @@
 
         .nav-menu {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             list-style: none;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .nav-menu a {
@@ -81,19 +81,51 @@
             color: #fff;
         }
 
-        .btn-login-nav {
-            background-color: var(--accent-color);
-            color: white !important;
-            padding: 7px 16px;
+        .btn-nav-login {
+            background-color: transparent;
+            color: var(--text-light) !important;
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
             border-radius: 6px;
             font-weight: 600;
+        }
+
+        .btn-nav-login:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color) !important;
+        }
+
+        .btn-nav-register {
+            background-color: var(--accent-color);
+            color: white !important;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .btn-nav-register:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-nav-master {
+            background-color: rgba(255, 170, 0, 0.15);
+            color: #ffaa00 !important;
+            border: 1px solid #ffaa00;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .btn-nav-master:hover {
+            background-color: #ffaa00;
+            color: #070d1d !important;
         }
 
         /* Hero Section */
         .hero {
             padding: 60px 20px;
             text-align: center;
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
         }
 
@@ -111,9 +143,20 @@
 
         .hero p {
             color: var(--text-gray);
-            font-size: 0.95rem;
+            font-size: 1rem;
             margin-bottom: 30px;
             line-height: 1.7;
+        }
+
+        .hero-logo-container {
+            margin: 30px 0;
+        }
+
+        .hero-logo-container img {
+            width: 220px;
+            height: 220px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0, 114, 255, 0.3));
         }
 
         .btn-primary {
@@ -133,26 +176,9 @@
             background-color: var(--accent-hover);
         }
 
-        /* Banner Logo Utama */
-        .showcase-banner {
-            max-width: 900px;
-            margin: 20px auto 60px;
-            padding: 0 20px;
-            text-align: center;
-        }
-
-        .showcase-banner img {
-            width: 100%;
-            max-height: 350px;
-            object-fit: cover;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
         /* Section Umum */
         .section-container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto 60px;
             padding: 0 20px;
         }
@@ -175,10 +201,10 @@
             line-height: 1.6;
         }
 
-        /* Grid Services / Capabilities */
+        /* Grid Services */
         .grid-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
 
@@ -207,10 +233,10 @@
             line-height: 1.5;
         }
 
-        /* Real Work Gallery */
+        /* Gallery Foto Asli Bengkel */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 20px;
         }
 
@@ -219,18 +245,18 @@
             border: 1px solid var(--border-color);
             border-radius: 10px;
             overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .gallery-box:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-color);
         }
 
         .gallery-img {
             width: 100%;
-            height: 180px;
+            height: 230px;
             background-color: #040812;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-gray);
-            font-size: 0.8rem;
-            border-bottom: 1px solid var(--border-color);
         }
 
         .gallery-img img {
@@ -240,17 +266,17 @@
         }
 
         .gallery-content {
-            padding: 15px;
+            padding: 18px;
         }
 
         .gallery-content h4 {
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: #fff;
             margin-bottom: 5px;
         }
 
         .gallery-content p {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-gray);
         }
 
@@ -275,62 +301,39 @@
         </div>
         <ul class="nav-menu">
             <li><a href="index.html">Home</a></li>
-            <li><a href="eviden.html">Galeri & Eviden</a></li>
-            <li><a href="https://wa.me/6288225604848" target="_blank">WhatsApp</a></li>
-            <li><a href="login.html" class="btn-login-nav">Login Sistem</a></li>
+            <li><a href="login.html" class="btn-nav-login">Masuk</a></li>
+            <li><a href="register.html" class="btn-nav-register">Daftar Customer</a></li>
+            <li><a href="master-login.html" class="btn-nav-master">Akun Master</a></li>
         </ul>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-logo-container">
+            <img src="logo-garage-tb.png" alt="Garage TB Official Logo">
+        </div>
         <h2>Built on Precision. <span>Driven by Reliability.</span></h2>
-        <p>GARAGE TB adalah bengkel spesialis tingkat lanjut untuk perawatan, perbaikan, restorasi helikopter, tank, serta layanan profesional microsoldering perangkat elektronik.</p>
-        <a href="https://wa.me/6288225604848" class="btn-primary" target="_blank">Konsultasi via WhatsApp</a>
+        <p>GARAGE TB adalah bengkel spesialis tingkat lanjut untuk perawatan helikopter, tank, kendaraan berat, serta pusat perbaikan profesional Service iPhone (Software, Hardware & Accessories).</p>
+        <a href="https://wa.me/6288225604848" class="btn-primary" target="_blank">Hubungi WhatsApp: 0882-2560-4848</a>
     </section>
-
-    <!-- Showcase Banner -->
-    <div class="showcase-banner">
-        <img src="foto1.jpg" alt="Garage TB Showcase" onerror="this.src='https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80'">
-    </div>
 
     <!-- Engineering Workshop Section -->
     <section class="section-container">
-        <h2 class="section-title">Engineering workshop dengan <span>standar profesional.</span></h2>
-        <p class="section-desc">Didukung oleh tim teknisi ahli berpengalaman tinggi serta peralatan diagnostik modern untuk memastikan akurasi mutlak pada setiap komponen militer maupun sipil.</p>
+        <h2 class="section-title">Engineering Workshop dengan <span>Standar Profesional.</span></h2>
+        <p class="section-desc">Didukung oleh teknisi berpengalaman tinggi serta fasilitas meja kerja dan perangkat diagnostik modern untuk akurasi mutlak pada setiap perbaikan unit.</p>
         
         <div class="grid-cards">
             <div class="card-item">
                 <h3>Technical Workshop</h3>
-                <p>Fasilitas pengerjaan mekanik berat dan komponen presisi tinggi.</p>
+                <p>Fasilitas pengerjaan mekanik berat dan perbaikan komponen presisi tinggi.</p>
             </div>
             <div class="card-item">
                 <h3>Helicopter & Tank Care</h3>
-                <p>Perawatan berkala, perbaikan mesin, dan restorasi bodi kendaraan khusus.</p>
+                <p>Perawatan berkala, perbaikan mesin, dan restorasi unit kendaraan taktis khusus.</p>
             </div>
             <div class="card-item">
-                <h3>Electronics & Board Repair</h3>
-                <p>Solusi tuntas perbaikan jalur mikro, microsoldering, dan pemulihan sistem.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Capabilities Section -->
-    <section class="section-container">
-        <h2 class="section-title">Capabilities & <span>Services.</span></h2>
-        <p class="section-desc">Berbagai lini keahlian utama yang kami tangani dengan ketelitian tingkat tinggi.</p>
-
-        <div class="grid-cards">
-            <div class="card-item">
-                <h3>Airframe Service</h3>
-                <p>Pemeriksaan struktur rangka dan bodi helikopter secara komprehensif.</p>
-            </div>
-            <div class="card-item">
-                <h3>Tank & Rantis Maintenance</h3>
-                <p>Penanganan sistem penggerak, transmisi, dan komponen mekanis kendaraan taktis.</p>
-            </div>
-            <div class="card-item">
-                <h3>Microsoldering Lab</h3>
-                <p>Perbaikan sirkuit elektronik mikro berstandar laboratorium presisi.</p>
+                <h3>Service iPhone Profesional</h3>
+                <p>Penanganan tuntas masalah software, hardware, hingga penggantian komponen original.</p>
             </div>
         </div>
     </section>
@@ -338,28 +341,66 @@
     <!-- Real Work Gallery Section -->
     <section class="section-container">
         <h2 class="section-title">Real Work. <span>True Craftsmanship.</span></h2>
-        <p class="section-desc">Dokumentasi langsung dari lapangan pengerjaan project GARAGE TB.</p>
+        <p class="section-desc">Dokumentasi langsung dari meja kerja dan aktivitas pengerjaan project di bengkel GARAGE TB.</p>
 
         <div class="gallery-grid">
             <div class="gallery-box">
-                <div class="gallery-img"><span>[ Foto Pengerjaan 1 ]</span></div>
+                <div class="gallery-img">
+                    <img src="IMG-20260906-WA0014.jpg" alt="Pengerjaan Unit iPhone">
+                </div>
                 <div class="gallery-content">
-                    <h4>Overhaul Komponen Utama</h4>
-                    <p>Pengecekan mendalam bagian mekanis unit.</p>
+                    <h4>Pengecekan & Perbaikan Hardware iPhone</h4>
+                    <p>Proses pembongkaran dan analisis komponen internal secara teliti di meja servis.</p>
                 </div>
             </div>
+
             <div class="gallery-box">
-                <div class="gallery-img"><span>[ Foto Pengerjaan 2 ]</span></div>
+                <div class="gallery-img">
+                    <img src="IMG-20260901-WA0095.jpg" alt="Suasana Meja Servis Workshop">
+                </div>
                 <div class="gallery-content">
-                    <h4>Kalibrasi & Perbaikan Sistem</h4>
-                    <p>Pengujian tingkat presisi kerja komponen.</p>
+                    <h4>Suasana Meja Kerja & Suku Cadang</h4>
+                    <p>Peralatan lengkap dan kesiapan stok unit untuk penanganan cepat.</p>
                 </div>
             </div>
+
             <div class="gallery-box">
-                <div class="gallery-img"><span>[ Foto Pengerjaan 3 ]</span></div>
+                <div class="gallery-img">
+                    <img src="IMG-20260215-WA0015.jpg" alt="Unit Siap Servis">
+                </div>
                 <div class="gallery-content">
-                    <h4>Microsoldering Board</h4>
-                    <p>Perbaikan sirkuit menggunakan mikroskop digital.</p>
+                    <h4>Manajemen Unit Pelanggan</h4>
+                    <p>Pengelolaan unit perangkat yang masuk dengan sistem antrean terstruktur.</p>
+                </div>
+            </div>
+
+            <div class="gallery-box">
+                <div class="gallery-img">
+                    <img src="IMG-20260127-WA0003.jpg" alt="Aktivitas Tim Teknisi">
+                </div>
+                <div class="gallery-content">
+                    <h4>Koordinasi & Pengerjaan Tim</h4>
+                    <p>Diskusi dan eksekusi project perbaikan langsung bersama tim ahli.</p>
+                </div>
+            </div>
+
+            <div class="gallery-box">
+                <div class="gallery-img">
+                    <img src="IMG_20251002_153807.jpg" alt="Detail Perbaikan Komponen">
+                </div>
+                <div class="gallery-content">
+                    <h4>Presisi Perbaikan Komponen</h4>
+                    <p>Fokus pada detail pemulihan fungsi komponen agar kembali normal.</p>
+                </div>
+            </div>
+
+            <div class="gallery-box">
+                <div class="gallery-img">
+                    <img src="IMG_20250919_200949.jpg" alt="Suasana Bengkel GARAGE TB">
+                </div>
+                <div class="gallery-content">
+                    <h4>Stasiun Kerja Utama</h4>
+                    <p>Sudut pengerjaan teknis harian di bengkel GARAGE TB.</p>
                 </div>
             </div>
         </div>
@@ -367,7 +408,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 GARAGE TB. All rights reserved. | Jl. Raya Pondok Melati, Kota Bekasi</p>
+        <p>&copy; 2026 GARAGE TB. All rights reserved. | Jl. Raya Kp. Sawah, Jatimelati, Kec. Pondok Melati, Kota Bekasi 17415</p>
     </footer>
 
 </body>
