@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GARAGE TB - Bengkel Helikopter & Tank</title>
+    <title>GARAGE TB - Bengkel Spesialis Helikopter, Tank & Elektronik</title>
     <style>
         :root {
-            --primary-color: #0b1329;
+            --primary-bg: #070d1d;
+            --card-bg: #111b33;
+            --border-color: #1f3359;
             --accent-color: #0072ff;
+            --accent-hover: #0056cc;
             --text-light: #f4f6f9;
-            --text-gray: #b0c4de;
-            --card-bg: #152238;
+            --text-gray: #94a3b8;
             --whatsapp-color: #25d366;
+            --whatsapp-hover: #1ebe5d;
         }
 
         * {
@@ -22,41 +25,45 @@
         }
 
         body {
-            background-color: var(--primary-color);
+            background-color: var(--primary-bg);
             color: var(--text-light);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* Navbar */
+        /* Navbar Modern */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
-            background-color: #060a16;
-            border-bottom: 1px solid #1a2a47;
+            padding: 18px 6%;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .nav-brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .nav-brand img {
-            width: 45px;
-            height: 45px;
+            width: 48px;
+            height: 48px;
             object-fit: contain;
             background: #fff;
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 4px;
+            border: 1px solid var(--border-color);
         }
 
         .nav-brand div h1 {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: #fff;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .nav-brand div p {
@@ -75,6 +82,7 @@
             color: var(--text-gray);
             text-decoration: none;
             font-size: 0.9rem;
+            font-weight: 500;
             transition: color 0.3s;
         }
 
@@ -85,57 +93,70 @@
         .btn-login-nav {
             background-color: var(--accent-color);
             color: white !important;
-            padding: 8px 18px;
-            border-radius: 6px;
+            padding: 9px 20px;
+            border-radius: 8px;
             font-weight: 600;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 114, 255, 0.3);
         }
 
         .btn-login-nav:hover {
-            background-color: #0056cc;
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
         }
 
-        /* Hero Section */
-        .hero {
+        /* Hero Section dengan Kotak Kontainer Elegan */
+        .hero-wrapper {
             flex-grow: 1;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 60px 20px;
+            padding: 40px 20px;
         }
 
-        .hero h2 {
-            font-size: 2.5rem;
+        .hero-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 750px;
+            text-align: center;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-card h2 {
+            font-size: 2.2rem;
             color: #fff;
             letter-spacing: 1px;
             margin-bottom: 15px;
+            font-weight: 800;
         }
 
-        .hero p {
-            font-size: 1rem;
+        .hero-card p {
+            font-size: 0.95rem;
             color: var(--text-gray);
-            max-width: 600px;
-            line-height: 1.6;
-            margin-bottom: 30px;
+            line-height: 1.7;
+            margin-bottom: 35px;
         }
 
         .btn-whatsapp {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             background-color: var(--whatsapp-color);
             color: white;
-            padding: 12px 28px;
+            padding: 14px 32px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
             font-size: 1rem;
             transition: transform 0.2s, background 0.3s;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.35);
         }
 
         .btn-whatsapp:hover {
-            background-color: #1ebe5d;
+            background-color: var(--whatsapp-hover);
             transform: translateY(-2px);
         }
 
@@ -143,16 +164,16 @@
         footer {
             text-align: center;
             padding: 20px;
-            background-color: #060a16;
+            background-color: var(--card-bg);
             color: var(--text-gray);
             font-size: 0.85rem;
-            border-top: 1px solid #1a2a47;
+            border-top: 1px solid var(--border-color);
         }
     </style>
 </head>
 <body>
 
-    <!-- Navbar Utama -->
+    <!-- Navbar Modern -->
     <nav>
         <div class="nav-brand">
             <img src="logo-garage-tb.png" alt="Logo GARAGE TB">
@@ -169,17 +190,22 @@
         </ul>
     </nav>
 
-    <!-- Konten Utama (Hero) -->
-    <div class="hero">
-        <h2>PRECISION BUILDS PERFORMANCE</h2>
-        <p>Spesialis perawatan, perbaikan, restorasi helikopter, tank, serta layanan profesional iPhone Repair, Board Repair & Microsoldering.</p>
-        <a href="https://wa.me/6288225604848" class="btn-whatsapp" target="_blank">Konsultasi via WhatsApp</a>
+    <!-- Konten Utama dalam Kartu Elegan -->
+    <div class="hero-wrapper">
+        <div class="hero-card">
+            <h2>PRECISION BUILDS PERFORMANCE</h2>
+            <p>Spesialis perawatan, perbaikan, restorasi helikopter, tank, serta layanan profesional iPhone Repair, Board Repair & Microsoldering dengan standar kualitas tinggi.</p>
+            <a href="https://wa.me/6288225604848" class="btn-whatsapp" target="_blank">
+                Konsultasi via WhatsApp
+            </a>
+        </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 GARAGE TB. All rights reserved. | Jl. Raya Ponduk Melati, Kota Bekasi</p>
+        <p>&copy; 2026 GARAGE TB. All rights reserved. | Jl. Raya Pondok Melati, Kota Bekasi</p>
     </footer>
 
 </body>
 </html>
+<li><a href="eviden.html">Galeri & Eviden</a></li>
