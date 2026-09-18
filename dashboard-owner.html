@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Owner - GARAGE TB</title>
+    <style>
+        :root {
+            --bg-color: #070d1d;
+            --card-bg: #111b33;
+            --border-color: #1f3359;
+            --accent-color: #0072ff;
+            --accent-hover: #0056cc;
+            --text-light: #f4f6f9;
+            --text-gray: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        aside {
+            width: 260px;
+            background-color: var(--card-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-brand img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            background: #fff;
+            border-radius: 6px;
+            padding: 2px;
+        }
+
+        .sidebar-brand h2 {
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 12px 15px;
+            color: var(--text-gray);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-logout {
+            background-color: rgba(239, 68, 68, 0.15);
+            color: #ef4444 !important;
+            border: 1px solid #ef4444;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .btn-logout:hover {
+            background-color: #ef4444 !important;
+            color: white !important;
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background-color: var(--card-bg);
+            padding: 20px 30px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .header-top h1 {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .header-top p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .stat-card h3 {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-bottom: 8px;
+        }
+
+        .stat-card .number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* Quick Action Section */
+        .action-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .action-box h3 {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .btn-action {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: background 0.2s;
+        }
+
+        .btn-action:hover {
+            background-color: var(--accent-hover);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Menu Owner -->
+    <aside>
+        <div>
+            <div class="sidebar-brand">
+                <img src="logo-garage-tb.png" alt="Logo">
+                <h2>GARAGE TB (Owner)</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="dashboard-owner.html" class="active">Dashboard Utama</a></li>
+                <li><a href="tambah-karyawan.html">Tambah Akun Internal</a></li>
+                <li><a href="index.html" target="_blank">Lihat Website Utama</a></li>
+            </ul>
+        </div>
+        <div>
+            <a href="master-login.html" class="sidebar-menu btn-logout">Keluar (Logout)</a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main>
+        <div class="header-top">
+            <div>
+                <h1>Selamat Datang, Owner GARAGE TB!</h1>
+                <p>Panel kontrol utama manajemen bengkel dan sistem internal.</p>
+            </div>
+        </div>
+
+        <!-- Statistik Singkat -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Unit Masuk (Servis)</h3>
+                <div class="number">24 Unit</div>
+            </div>
+            <div class="stat-card">
+                <h3>Karyawan / Teknisi Aktif</h3>
+                <div class="number">6 Orang</div>
+            </div>
+            <div class="stat-card">
+                <h3>Status Sistem</h3>
+                <div class="number" style="color: #10b981; font-size: 1.4rem; margin-top: 5px;">Normal / Aman</div>
+            </div>
+        </div>
+
+        <!-- Kelola Cepat -->
+        <div class="action-box">
+            <h3>Akses Cepat Pengelolaan</h3>
+            <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 20px;">Gunakan tombol di bawah ini untuk mendaftarkan staf baru atau memantau operasional bengkel.</p>
+            <a href="tambah-karyawan.html" class="btn-action">+ Tambah Akun Internal / Karyawan</a>
+            <a href="index.html" class="btn-action" style="background-color: #1f3359;">Kembali ke Beranda</a>
+        </div>
+    </main>
+
+</body>
+</html>
